@@ -1,7 +1,5 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import StackVerifyDB from "@stackverify/db";
 
 function Copy({ label, value }) {
   const [copied, setCopied] = useState(false);
@@ -32,19 +30,19 @@ export default function DashboardPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // ✅ Only run this when we're in the browser
     if (typeof window === "undefined") return;
+    const t = localStorage.getItem("sv_token");
+    if (!t) {
+      window.location.href = "/login";
+      return;
+    }
+
+    setToken(t);
 
     (async () => {
-      const t = localStorage.getItem("sv_token");
-      if (!t) {
-        window.location.href = "/login";
-        return;
-      }
-
-      setToken(t);
-
       try {
+        // ✅ Import SDK only on client
+        const { default: StackVerifyDB } = await import("@stackverify/db");
         const db = new StackVerifyDB();
         db.token = t;
 
@@ -106,11 +104,7 @@ export default function DashboardPage() {
           <Copy label="Token" value={token} />
           <div className="space-y-1">
             <div className="text-sm font-medium text-gray-700">Role</div>
-            <input
-              className="input"
-              value={me?.role || "user"}
-              readOnly
-            />
+            <input className="input" value={me?.role || "user"} readOnly />
           </div>
         </div>
 
