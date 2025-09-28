@@ -2,11 +2,10 @@
 ---
  ## 🚀 Installation Using **npm**: 
 ``` npm install @stackverify/db 
-```
 
-yarn add @stackverify/db 
+npm add @stackverify/db 
 ````
----
+
  Registration (Done Outside the SDK)
 
 Users create accounts through your dashboard, not through the SDK.
