@@ -18,6 +18,8 @@ curl -X POST https://db.stackverify.site/api/register \ -H "Content-Type: applic
 
 { "success": true, "schema": "john_example_com_1695800000000" } 
 
+or use https://stackverify-database.vercel.app
+
 After registering, they can use this SDK to log in and interact with their schema.
 
 ---
